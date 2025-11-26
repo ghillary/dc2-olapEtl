@@ -1,0 +1,53 @@
+[2025-11-26T01:40:46.063+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-11-26T01:40:46.118+0000] {taskinstance.py:2073} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_fatovendas.load_fatovendas manual__2025-11-26T01:40:38.161242+00:00 [queued]>
+[2025-11-26T01:40:46.132+0000] {taskinstance.py:2073} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_fatovendas.load_fatovendas manual__2025-11-26T01:40:38.161242+00:00 [queued]>
+[2025-11-26T01:40:46.135+0000] {taskinstance.py:2303} INFO - Starting attempt 1 of 1
+[2025-11-26T01:40:46.157+0000] {taskinstance.py:2327} INFO - Executing <Task(PythonOperator): load_fatovendas> on 2025-11-26 01:40:38.161242+00:00
+[2025-11-26T01:40:46.181+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'etl_fatovendas', 'load_fatovendas', 'manual__2025-11-26T01:40:38.161242+00:00', '--job-id', '27', '--raw', '--subdir', 'DAGS_FOLDER/etl_fatovendas.py', '--cfg-path', '/tmp/tmprk21imqs']
+[2025-11-26T01:40:46.188+0000] {standard_task_runner.py:91} INFO - Job 27: Subtask load_fatovendas
+[2025-11-26T01:40:46.188+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=705) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-11-26T01:40:46.190+0000] {standard_task_runner.py:63} INFO - Started process 722 to run task
+[2025-11-26T01:40:46.339+0000] {task_command.py:426} INFO - Running <TaskInstance: etl_fatovendas.load_fatovendas manual__2025-11-26T01:40:38.161242+00:00 [running]> on host ed440a75a387
+[2025-11-26T01:40:46.521+0000] {taskinstance.py:2644} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_fatovendas' AIRFLOW_CTX_TASK_ID='load_fatovendas' AIRFLOW_CTX_EXECUTION_DATE='2025-11-26T01:40:38.161242+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-26T01:40:38.161242+00:00'
+[2025-11-26T01:40:46.524+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-11-26T01:40:47.411+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-11-26T01:40:47.412+0000] {taskinstance.py:2890} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/etl_fatovendas.py", line 14, in load_fatovendas
+    df = salesorderdetail.merge(salesorderheader, on="SalesOrderID")
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/frame.py", line 10487, in merge
+    return merge(
+           ^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/reshape/merge.py", line 169, in merge
+    op = _MergeOperation(
+         ^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/reshape/merge.py", line 791, in __init__
+    ) = self._get_merge_keys()
+        ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/reshape/merge.py", line 1269, in _get_merge_keys
+    right_keys.append(right._get_label_or_level_values(rk))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/generic.py", line 1844, in _get_label_or_level_values
+    raise KeyError(key)
+KeyError: 'SalesOrderID'
+[2025-11-26T01:40:47.456+0000] {taskinstance.py:1205} INFO - Marking task as FAILED. dag_id=etl_fatovendas, task_id=load_fatovendas, execution_date=20251126T014038, start_date=20251126T014046, end_date=20251126T014047
+[2025-11-26T01:40:47.478+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 27 for task load_fatovendas ('SalesOrderID'; 722)
+[2025-11-26T01:40:47.535+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-11-26T01:40:47.567+0000] {taskinstance.py:3482} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-11-26T01:40:47.571+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
